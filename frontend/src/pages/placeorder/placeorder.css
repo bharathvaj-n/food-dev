@@ -1,0 +1,156 @@
+.order {
+  width: 100%;
+  padding: 50px 0 80px;
+  box-sizing: border-box;
+}
+
+/* ── Two-column layout ── */
+.order-form {
+  display: flex;
+  gap: 60px;
+  align-items: flex-start;
+}
+
+/* ── LEFT ── */
+.order-left {
+  flex: 1.2;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.order-title {
+  font-size: 22px;
+  font-weight: 700;
+  color: #262626;
+  margin: 0 0 8px;
+}
+
+.order-left input {
+  width: 100%;
+  padding: 12px 14px;
+  border: 1px solid #d9d9d9;
+  border-radius: 5px;
+  font-size: 14px;
+  color: #333;
+  outline: none;
+  box-sizing: border-box;
+  transition: border-color 0.2s;
+  background: #fff;
+}
+
+.order-left input:focus {
+  border-color: tomato;
+}
+
+.order-left input::placeholder {
+  color: #aaa;
+}
+
+/* two inputs side by side */
+.order-row {
+  display: flex;
+  gap: 16px;
+}
+
+.order-row input {
+  flex: 1;
+}
+
+/* ── RIGHT ── */
+.order-right {
+  flex: 0.8;
+  position: sticky;
+  top: 80px;
+}
+
+.order-cart-total {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.order-cart-total h2 {
+  font-size: 22px;
+  font-weight: 700;
+  color: #262626;
+  margin: 0 0 4px;
+}
+
+.order-total-row {
+  display: flex;
+  justify-content: space-between;
+  font-size: 15px;
+  color: #555;
+}
+
+.order-total-final b {
+  font-size: 16px;
+  color: #262626;
+}
+
+.order-cart-total hr {
+  border: none;
+  border-top: 1px solid #e8e8e8;
+  margin: 0;
+}
+
+.order-pay-btn {
+  width: 100%;
+  padding: 15px;
+  background: tomato;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  font-size: 15px;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+  cursor: pointer;
+  margin-top: 6px;
+  transition: background 0.3s;
+}
+
+.order-pay-btn:hover {
+  background: #d63b18;
+}
+
+/* ── Responsive ── */
+@media (max-width: 860px) {
+  .order-form {
+    flex-direction: column;
+    gap: 40px;
+  }
+
+  .order-right {
+    position: static;
+    width: 100%;
+  }
+
+  .order-cart-total {
+    max-width: 100%;
+  }
+}
+
+@media (max-width: 480px) {
+  .order {
+    padding: 30px 0 60px;
+  }
+
+  .order-row {
+    flex-direction: column;
+    gap: 16px;
+  }
+
+  .order-title {
+    font-size: 18px;
+  }
+
+  .order-cart-total h2 {
+    font-size: 18px;
+  }
+
+  .order-pay-btn {
+    font-size: 14px;
+    padding: 13px;
+  }
+}

@@ -1,0 +1,99 @@
+.food-display {
+  margin-top: 40px;
+  margin-bottom: 40px;
+  max-width: 1200px;
+  margin-left: auto;
+  margin-right: auto;
+  padding: 0 20px;
+}
+
+.food-display h2 {
+  font-size: 32px;
+  font-weight: 600;
+  margin-bottom: 30px;
+  color: #262626;
+  letter-spacing: -0.5px;
+}
+
+.food-display-list {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 24px;
+  width: 100%;
+}
+
+/* Tablet - 2 columns */
+@media (max-width: 1024px) {
+  .food-display {
+    margin-top: 35px;
+    margin-bottom: 35px;
+    padding: 0 15px;
+  }
+
+  .food-display-list {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+  }
+  
+  .food-display h2 {
+    font-size: 28px;
+    margin-bottom: 25px;
+  }
+}
+
+/* Mobile - 1 column */
+@media (max-width: 768px) {
+  .food-display {
+    margin-top: 30px;
+    margin-bottom: 30px;
+    padding: 0 12px;
+    max-width: 100%;
+  }
+  
+  .food-display-list {
+    grid-template-columns: 1fr;
+    gap: 16px;
+  }
+  
+  .food-display h2 {
+    font-size: 24px;
+    margin-bottom: 20px;
+  }
+}
+
+/* Small mobile - force single column */
+@media (max-width: 600px) {
+  .food-display {
+    margin-top: 20px;
+    margin-bottom: 20px;
+    padding: 0;
+  }
+
+  .food-display h2 {
+    font-size: 22px;
+    margin-bottom: 14px;
+  }
+
+  .food-display-list {
+    grid-template-columns: 1fr;
+    gap: 14px;
+  }
+}
+
+/* Extra small mobile */
+@media (max-width: 480px) {
+  .food-display {
+    margin-top: 16px;
+    margin-bottom: 16px;
+    padding: 0;
+  }
+
+  .food-display-list {
+    gap: 12px;
+  }
+  
+  .food-display h2 {
+    font-size: 20px;
+    margin-bottom: 12px;
+  }
+}

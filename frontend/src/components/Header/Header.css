@@ -1,0 +1,148 @@
+.header {
+  max-width: 1100px !important;
+  width: 100% !important;
+  height: 395px !important;
+  margin: 35px auto 0 !important;
+  border-radius: 10px !important;
+  overflow: hidden !important;
+  position: relative !important;
+  background-size: cover !important;
+  background-position: center !important;
+}
+
+.header::before {
+  content: "" !important;
+  position: absolute !important;
+  inset: 0 !important;
+  background: rgba(0, 0, 0, 0.25) !important;
+}
+
+.header-contents {
+  position: relative !important;
+  z-index: 2 !important;
+  height: 100% !important;
+  max-width: 560px !important;
+  padding-left: 70px !important;
+  display: flex !important;
+  flex-direction: column !important;
+  justify-content: center !important;
+  animation: fadeIn 3s !important;
+}
+
+.header-contents h2 {
+  color: #fff !important;
+  font-size: 48px !important;
+  line-height: 1.15 !important;
+  font-weight: 700 !important;
+  margin-bottom: 18px !important;
+}
+
+.header-contents p {
+  color: #fff !important;
+  font-size: 13px !important;
+  line-height: 1.5 !important;
+  margin-bottom: 22px !important;
+}
+
+.header-contents button {
+  width: fit-content !important;
+  border: none !important;
+  background: #fff !important;
+  color: #555 !important;
+  padding: 11px 28px !important;
+  border-radius: 50px !important;
+  cursor: pointer !important;
+}
+
+@media (max-width: 600px) {
+  .header {
+    height: 150px !important;
+    margin: 20px auto 0 !important;
+    border-radius: 8px !important;
+    background-size: cover !important;
+    background-position: center !important;
+  }
+
+  .header-contents {
+    padding-left: 12px !important;
+    max-width: 60% !important;
+  }
+
+  .header-contents h2 {
+    font-size: 16px !important;
+    line-height: 1.2 !important;
+    margin-bottom: 5px !important;
+  }
+
+  .header-contents p {
+    font-size: 9px !important;
+    line-height: 1.4 !important;
+    margin-bottom: 8px !important;
+  }
+
+  .header-contents button {
+    padding: 5px 10px !important;
+    font-size: 10px !important;
+    border-radius: 50px !important;
+  }
+}
+
+/* ── MOBILE OVERRIDE (max-width: 600px) ── */
+@media (max-width: 600px) {
+  .header {
+    height: 130px !important;
+    margin: 18px auto 0 !important;
+    border-radius: 8px !important;
+    background-size: cover !important;
+    background-position: center !important;
+    width: 100% !important;
+  }
+
+  .header-contents {
+    padding-left: 12px !important;
+    max-width: 60% !important;
+    justify-content: center !important;
+  }
+
+  .header-contents h2 {
+    font-size: 15px !important;
+    line-height: 1.2 !important;
+    margin-bottom: 4px !important;
+    font-weight: 700 !important;
+  }
+
+  .header-contents p {
+    font-size: 8px !important;
+    line-height: 1.4 !important;
+    margin-bottom: 6px !important;
+  }
+
+  .header-contents button {
+    padding: 4px 10px !important;
+    font-size: 9px !important;
+    border-radius: 50px !important;
+  }
+}
+
+@media (max-width:1050px) {
+  header {
+    height: 38vw;
+  }
+
+  .header-contents {
+    max-width: 45%;
+  }
+}
+
+@media (max-width: 750px) {
+  .header-contents {
+    max-width: 55%;
+  }
+
+  .header-contents p{
+    display: none;
+  }
+
+  .header-contents button{
+    padding: 2vw 4vw;
+  }
