@@ -12,7 +12,6 @@ const Cart = () => {
   const subtotal = getTotalCartAmount()
   const deliveryFee = subtotal > 0 ? 2 : 0
   const total = subtotal + deliveryFee
-
   const cartHasItems = food_list.some((item) => cartItems[item._id] > 0)
 
   return (
@@ -85,12 +84,12 @@ const Cart = () => {
             onClick={() => navigate('/order')}
             disabled={!cartHasItems}
           >
-            Proceed to Checkout
+            PROCEED TO CHECKOUT
           </button>
         </div>
 
         <div className='cart-promocode'>
-          <p>If you have a promo code, enter it here</p>
+          <p>If you have a promo code, Enter it here</p>
           <div className='cart-promocode-input'>
             <input
               type='text'

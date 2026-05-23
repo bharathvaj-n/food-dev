@@ -1,19 +1,5 @@
 import orderModel from "../models/orderModel.js";
 import userModel  from "../models/userModel.js";
-import Stripe from "stripe";
-
-// Stripe is initialized lazily inside placeOrder so a missing key
-// never crashes the server on startup — COD orders always work.
-const getStripe = () => {
-  const key = process.env.STRIPE_SECRET_KEY;
-  if (!key || key.startsWith("sk_test_your")) {
-    throw new Error("Stripe secret key is not configured in .env");
-  }
-  return new Stripe(key);
-};
-
-const DELIVERY_FEE = 2;
-const FRONTEND_URL = process.env.FRONTEND_URL || "http://localhost:5173";
 
 // ── POST /api/order/place ─────────────────────────────────────────────────
 const placeOrder = async (req, res) => {
@@ -25,59 +11,51 @@ const placeOrder = async (req, res) => {
     }
 
     const order = new orderModel({
-      userId: req.userId,
+      userId:        req.userId,
       items,
       amount,
       address,
       paymentMethod,
-      payment: false,
-      status:  "Pending",
+      payment:       false,
+      status:        "Pending",
     });
     await order.save();
 
-    if (paymentMethod === "Stripe") {
-      let stripe;
-      try {
-        stripe = getStripe();
-      } catch (e) {
-        await orderModel.findByIdAndDelete(order._id);
-        return res.status(500).json({ success: false, message: e.message });
-      }
-
-      const lineItems = items.map((item) => ({
-        price_data: {
-          currency: "usd",
-          product_data: { name: item.name },
-          unit_amount: Math.round(item.price * 100),
-        },
-        quantity: item.quantity,
-      }));
-
-      lineItems.push({
-        price_data: {
-          currency: "usd",
-          product_data: { name: "Delivery Fee" },
-          unit_amount: DELIVERY_FEE * 100,
-        },
-        quantity: 1,
-      });
-
-      const session = await stripe.checkout.sessions.create({
-        payment_method_types: ["card"],
-        line_items: lineItems,
-        mode: "payment",
-        success_url: `${FRONTEND_URL}/verify?success=true&orderId=${order._id}`,
-        cancel_url:  `${FRONTEND_URL}/verify?success=false&orderId=${order._id}`,
-      });
-
-      return res.json({ success: true, session_url: session.url, orderId: order._id });
+    // COD: clear cart immediately
+    if (paymentMethod === "COD") {
+      await userModel.findByIdAndUpdate(req.userId, { cartData: {} });
     }
 
-    // Clear cart only after COD order is confirmed
-    await userModel.findByIdAndUpdate(req.userId, { cartData: {} });
-    res.json({ success: true, message: "Order placed successfully", orderId: order._id });
+    res.json({ success: true, message: "Order created", orderId: order._id });
   } catch (error) {
     console.error("placeOrder error:", error);
+    res.status(500).json({ success: false, message: "Server error" });
+  }
+};
+
+// ── POST /api/order/confirm (called after 3DS COMPLETE) ──────────────────
+const confirmPayment = async (req, res) => {
+  try {
+    const { orderId } = req.body;
+    if (!orderId) {
+      return res.status(400).json({ success: false, message: "orderId is required" });
+    }
+
+    const order = await orderModel.findByIdAndUpdate(
+      orderId,
+      { payment: true, status: "Processing", paidAt: new Date() },
+      { new: true }
+    );
+
+    if (!order) {
+      return res.status(404).json({ success: false, message: "Order not found" });
+    }
+
+    await userModel.findByIdAndUpdate(order.userId, { cartData: {} });
+
+    res.json({ success: true, message: "Payment confirmed", orderId: order._id });
+  } catch (error) {
+    console.error("confirmPayment error:", error);
     res.status(500).json({ success: false, message: "Server error" });
   }
 };
@@ -134,4 +112,25 @@ const updateStatus = async (req, res) => {
   }
 };
 
-export { placeOrder, verifyOrder, userOrders, allOrders, updateStatus };
+// ── POST /api/order/cancel ───────────────────────────────────────────────
+const cancelOrder = async (req, res) => {
+  try {
+    const { orderId } = req.body;
+    if (!orderId) return res.status(400).json({ success: false, message: "orderId is required" });
+
+    const order = await orderModel.findByIdAndUpdate(
+      orderId,
+      { payment: false, status: "cancelled", cancelledAt: new Date() },
+      { new: true }
+    );
+
+    if (!order) return res.status(404).json({ success: false, message: "Order not found" });
+
+    res.json({ success: true, message: "Payment cancelled successfully" });
+  } catch (error) {
+    console.error("cancelOrder error:", error);
+    res.status(500).json({ success: false, message: "Server error" });
+  }
+};
+
+export { placeOrder, confirmPayment, verifyOrder, userOrders, allOrders, updateStatus, cancelOrder };

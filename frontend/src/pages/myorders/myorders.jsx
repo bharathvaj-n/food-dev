@@ -56,6 +56,9 @@ const MyOrders = () => {
               }`}>
                 &#x25cf; {order.status}
               </span>
+              <span className={`payment-badge ${order.payment ? 'payment-paid' : 'payment-pending'}`}>
+                {order.payment ? '✓ Paid' : '⏳ Unpaid'}
+              </span>
               <button className='track-btn'>Track Order</button>
             </div>
           ))}

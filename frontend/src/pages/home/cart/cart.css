@@ -129,16 +129,22 @@
   background: tomato;
   color: #fff;
   border: none;
-  border-radius: 6px;
+  border-radius: 4px;
   font-size: 15px;
   font-weight: 600;
   cursor: pointer;
   margin-top: 4px;
-  transition: background 0.3s;
+  letter-spacing: 0.5px;
+  transition: background 0.25s;
 }
 
-.checkout-btn:hover {
-  background: #d63b18;
+.checkout-btn:hover:not(:disabled) {
+  background: #e03b18;
+}
+
+.checkout-btn:disabled {
+  background: #ccc;
+  cursor: not-allowed;
 }
 
 /* ── Promo ── */
@@ -181,7 +187,7 @@
   font-size: 14px;
   font-weight: 600;
   cursor: pointer;
-  transition: background 0.3s;
+  transition: background 0.25s;
 }
 
 .cart-promocode-input button:hover {

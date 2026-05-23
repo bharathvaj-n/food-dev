@@ -26,7 +26,7 @@
 
 .order-card {
   display: grid;
-  grid-template-columns: 48px 1fr auto auto;
+  grid-template-columns: 48px 1fr auto auto auto;
   align-items: center;
   gap: 16px;
   background: #fff;
@@ -59,6 +59,16 @@
 .order-status.status-out        { color: #f97316; }
 .order-status.status-delivered  { color: #22c55e; }
 
+.payment-badge {
+  font-size: 12px;
+  font-weight: 600;
+  padding: 4px 10px;
+  border-radius: 20px;
+  white-space: nowrap;
+}
+.payment-paid    { background: #f0fdf4; color: #16a34a; border: 1px solid #bbf7d0; }
+.payment-pending { background: #fafafa; color: #9ca3af; border: 1px solid #e5e7eb; }
+
 .track-btn {
   padding: 8px 16px;
   background: #fff;
@@ -79,9 +89,10 @@
 @media (max-width: 600px) {
   .order-card {
     grid-template-columns: 40px 1fr;
-    grid-template-rows: auto auto;
+    grid-template-rows: auto auto auto;
   }
 
-  .order-status { grid-column: 2; }
-  .track-btn    { grid-column: 1 / -1; width: 100%; }
+  .order-status  { grid-column: 2; }
+  .payment-badge { grid-column: 2; justify-self: start; }
+  .track-btn     { grid-column: 1 / -1; width: 100%; }
 }

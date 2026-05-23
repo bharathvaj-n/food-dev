@@ -123,13 +123,7 @@ const PlaceOrder = () => {
     navigate(`/c/pay/${sessionId}`)
   }
 
-  const resolveImage = (image) => {
-    if (!image || typeof image !== 'string') return ''
-    if (image.startsWith('/') || image.startsWith('http')) return image
-    return `/images/${image}`
-  }
-
-  return (
+return (
     <div className='order'>
       <form className='order-form' onSubmit={handleSubmit} noValidate>
 
@@ -186,52 +180,30 @@ const PlaceOrder = () => {
           </div>
         </div>
 
-        {/* ── RIGHT: Order Summary ── */}
+        {/* ── RIGHT: Cart Totals ── */}
         <div className='order-right'>
           <div className='order-summary-box'>
+            <h2 className='order-summary-title'>Cart Totals</h2>
 
-            {/* Cart items */}
-            <h2 className='order-summary-title'>Order Summary</h2>
-            <div className='order-items-list'>
-              {cartList.length === 0 ? (
-                <p className='order-empty'>Your cart is empty</p>
-              ) : cartList.map(item => (
-                <div key={item._id} className='order-item-row'>
-                  <img src={resolveImage(item.image)} alt={item.name} className='order-item-img' />
-                  <div className='order-item-details'>
-                    <p className='order-item-name'>{item.name}</p>
-                    <p className='order-item-qty'>Qty: {cartItems[item._id]}</p>
-                  </div>
-                  <p className='order-item-price'>${(item.price * cartItems[item._id]).toFixed(2)}</p>
-                </div>
-              ))}
+            <div className='order-total-row'>
+              <span>Subtotal</span>
+              <span>${subtotal.toFixed(2)}</span>
             </div>
-
             <hr className='order-divider' />
 
-            {/* Totals */}
-            <div className='order-total-row'><span>Subtotal</span><span>${subtotal.toFixed(2)}</span></div>
-            <div className='order-total-row'><span>Delivery Fee</span><span>${subtotal > 0 ? DELIVERY_FEE.toFixed(2) : '0.00'}</span></div>
+            <div className='order-total-row'>
+              <span>Delivery Fee</span>
+              <span>${subtotal > 0 ? DELIVERY_FEE.toFixed(2) : '0.00'}</span>
+            </div>
             <hr className='order-divider' />
-            <div className='order-total-row order-total-final'><b>Total</b><b>${total.toFixed(2)}</b></div>
 
-            {/* ── Stripe checkout strip ── */}
-            <div className='stripe-strip'>
-              <div className='stripe-strip-top'>
-                <span className='stripe-lock'>🔒</span>
-                <span className='stripe-strip-label'>Secure checkout powered by</span>
-                <span className='stripe-strip-brand'>Stripe</span>
-              </div>
-              <div className='stripe-card-icons'>
-                <span className='card-icon' title='Visa'>VISA</span>
-                <span className='card-icon mc' title='Mastercard'>MC</span>
-                <span className='card-icon amex' title='American Express'>AMEX</span>
-                <span className='card-icon' title='Discover'>DISC</span>
-              </div>
+            <div className='order-total-row order-total-final'>
+              <b>Total</b>
+              <b>${total.toFixed(2)}</b>
             </div>
 
             <button type='submit' className='order-pay-btn' disabled={cartList.length === 0}>
-              🔒 PROCEED TO PAYMENT →
+              PROCEED TO PAYMENT
             </button>
           </div>
         </div>

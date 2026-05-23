@@ -1,14 +1,14 @@
 @echo off
-echo Starting Tomato Admin Panel...
+echo Starting Food Dev...
 
 echo.
 echo [1/2] Starting Backend on http://localhost:4000
-start "Backend - Port 4000" cmd /k "cd /d %~dp0backend && node server.js"
+start "Backend - Port 4000" cmd /k "cd /d %~dp0backend && npm install && node server.js"
 
 timeout /t 3 /nobreak >nul
 
-echo [2/2] Starting Admin Frontend on http://localhost:5173
-start "Admin Frontend - Port 5173" cmd /k "cd /d %~dp0.vscode\admin && npm run dev"
+echo [2/2] Starting Frontend on http://localhost:5173
+start "Frontend - Port 5173" cmd /k "cd /d %~dp0frontend && npm install && npm run dev"
 
 echo.
 echo Both servers starting...
