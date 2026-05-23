@@ -15,6 +15,7 @@
   cursor: pointer;
 }
 
+/* ── Nav links ── */
 .navbar-menu {
   display: flex;
   list-style: none;
@@ -28,22 +29,16 @@
 .navbar-menu li {
   font-size: 15px;
   font-weight: 500;
-  color: #555555;
+  color: #555;
   cursor: pointer;
-  transition: all 0.3s ease;
+  transition: color 0.2s ease;
   white-space: nowrap;
-  padding: 0;
 }
 
-.navbar-menu li:hover {
-  color: #ff6b35;
-}
+.navbar-menu li:hover  { color: #ff6347; }
+.navbar-menu li.active { color: #ff6347; border-bottom: 2px solid #ff6347; }
 
-.navbar-menu li.active {
-  color: #ff6b35;
-  border-bottom: 2px solid #ff6b35;
-}
-
+/* ── Right section ── */
 .navbar-right {
   display: flex;
   align-items: center;
@@ -55,12 +50,10 @@
   width: 20px;
   height: 20px;
   cursor: pointer;
-  transition: all 0.3s ease;
+  transition: opacity 0.2s;
 }
 
-.icon:hover {
-  opacity: 0.7;
-}
+.icon:hover { opacity: 0.65; }
 
 .navbar-search-icon {
   position: relative;
@@ -71,56 +64,166 @@
   position: absolute;
   width: 8px;
   height: 8px;
-  background-color: #ff6b35;
+  background: #ff6347;
   border-radius: 50%;
   top: -8px;
   right: -8px;
 }
 
+/* ── Sign in button ── */
 .signin-btn {
-  background-color: transparent;
-  color: #555555;
+  background: transparent;
+  color: #555;
   border: 1px solid #ddd;
   font-size: 13px;
   font-weight: 500;
   padding: 6px 16px;
   border-radius: 4px;
   cursor: pointer;
-  transition: all 0.3s ease;
+  transition: color 0.2s, border-color 0.2s, background 0.2s;
   white-space: nowrap;
 }
 
 .signin-btn:hover {
-  color: #ff6b35;
-  border-color: #ff6b35;
-  background-color: rgba(255, 107, 53, 0.05);
+  color: #ff6347;
+  border-color: #ff6347;
+  background: rgba(255, 99, 71, 0.05);
 }
 
+/* ═══════════════════════════════════════
+   Profile dropdown
+═══════════════════════════════════════ */
+.profile-wrap {
+  position: relative;
+}
+
+/* Circular avatar button */
+.profile-btn {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  border: 2px solid #e8e8e8;
+  background: #fff;
+  padding: 0;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: border-color 0.2s, box-shadow 0.2s;
+  overflow: hidden;
+}
+
+.profile-btn:hover {
+  border-color: #ff6347;
+  box-shadow: 0 0 0 3px rgba(255, 99, 71, 0.12);
+}
+
+.profile-icon {
+  width: 22px;
+  height: 22px;
+  object-fit: contain;
+}
+
+/* Dropdown panel */
+.profile-dropdown {
+  position: absolute;
+  top: calc(100% + 10px);
+  right: 0;
+  width: 170px;
+  background: #fff;
+  border: 1px solid #ebebeb;
+  border-radius: 10px;
+  box-shadow: 0 8px 28px rgba(0, 0, 0, 0.12);
+  z-index: 999;
+
+  /* Hidden state */
+  opacity: 0;
+  transform: translateY(-8px);
+  pointer-events: none;
+  transition: opacity 0.2s ease, transform 0.2s ease;
+}
+
+/* Visible state */
+.profile-dropdown.open {
+  opacity: 1;
+  transform: translateY(0);
+  pointer-events: auto;
+}
+
+/* Small arrow tip */
+.profile-dropdown::before {
+  content: '';
+  position: absolute;
+  top: -6px;
+  right: 12px;
+  width: 11px;
+  height: 11px;
+  background: #fff;
+  border-left: 1px solid #ebebeb;
+  border-top: 1px solid #ebebeb;
+  transform: rotate(45deg);
+}
+
+.profile-dropdown ul {
+  list-style: none;
+  margin: 0;
+  padding: 6px 0;
+}
+
+/* Each menu item */
+.profile-dropdown li {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 16px;
+  font-size: 13.5px;
+  font-weight: 500;
+  color: #333;
+  cursor: pointer;
+  transition: background 0.15s ease, color 0.15s ease;
+}
+
+.profile-dropdown li:hover {
+  background: #fff5f3;
+  color: #ff6347;
+}
+
+.profile-dropdown li img {
+  width: 16px;
+  height: 16px;
+  object-fit: contain;
+  opacity: 0.6;
+  transition: opacity 0.15s;
+}
+
+.profile-dropdown li:hover img {
+  opacity: 1;
+  filter: invert(40%) sepia(80%) saturate(600%) hue-rotate(335deg);
+}
+
+/* Logout item — subtle red tint */
+.profile-dropdown li.logout-item:hover {
+  background: #fff0f0;
+  color: #e53935;
+}
+
+.profile-dropdown li.logout-item:hover img {
+  filter: invert(25%) sepia(90%) saturate(700%) hue-rotate(330deg);
+}
+
+/* ── Responsive ── */
 @media (max-width: 600px) {
-  .navbar {
-    height: 50px;
-    gap: 0;
-  }
+  .navbar       { height: 50px; gap: 0; }
+  .logo         { width: 70px; }
+  .navbar-menu  { display: none; }
+  .navbar-right { gap: 10px; }
+  .icon         { width: 18px; height: 18px; }
+  .signin-btn   { padding: 4px 10px; font-size: 11px; }
+  .profile-btn  { width: 30px; height: 30px; }
+  .profile-icon { width: 18px; height: 18px; }
 
-  .logo {
-    width: 70px;
-  }
-
-  .navbar-menu {
-    display: none;
-  }
-
-  .navbar-right {
-    gap: 10px;
-  }
-
-  .icon {
-    width: 18px;
-    height: 18px;
-  }
-
-  .signin-btn {
-    padding: 4px 10px;
-    font-size: 11px;
+  .profile-dropdown {
+    right: -8px;
+    width: 155px;
   }
 }

@@ -1,3 +1,4 @@
+/* ── Overlay ── */
 .login-popup {
   position: fixed;
   inset: 0;
@@ -8,48 +9,106 @@
   justify-content: center;
 }
 
+/* ── Card ── */
 .login-popup-container {
-  background: #fff;
-  border-radius: 8px;
+  background: #ffffff;
+  border-radius: 12px;
   padding: 32px 28px;
   width: 100%;
-  max-width: 380px;
+  max-width: 400px;
   display: flex;
   flex-direction: column;
-  gap: 20px;
-  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
-  animation: popIn 0.25s ease;
+  gap: 18px;
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.18);
+  animation: popIn 0.22s ease;
 }
 
 @keyframes popIn {
-  from { opacity: 0; transform: scale(0.92); }
-  to   { opacity: 1; transform: scale(1); }
+  from { opacity: 0; transform: scale(0.93) translateY(10px); }
+  to   { opacity: 1; transform: scale(1)   translateY(0); }
 }
 
-/* ── Title row ── */
+/* ── Header ── */
 .login-popup-title {
   display: flex;
   justify-content: space-between;
-  align-items: center;
+  align-items: flex-start;
 }
 
-.login-popup-title h2 {
+.login-popup-title-left h2 {
   font-size: 22px;
   font-weight: 700;
+  margin: 0 0 4px;
   color: #262626;
+}
+
+.login-popup-subtitle {
+  font-size: 13px;
+  color: #888;
   margin: 0;
 }
 
 .login-popup-title img {
-  width: 16px;
-  height: 16px;
+  width: 15px;
+  height: 15px;
   cursor: pointer;
-  opacity: 0.6;
+  opacity: 0.45;
+  margin-top: 4px;
   transition: opacity 0.2s;
 }
 
 .login-popup-title img:hover {
   opacity: 1;
+}
+
+/* ── Tab switcher ── */
+.login-popup-tabs {
+  display: flex;
+  background: #f0f0f0;
+  border-radius: 8px;
+  padding: 4px;
+  gap: 4px;
+}
+
+.login-popup-tabs button {
+  flex: 1;
+  padding: 9px;
+  border: none;
+  border-radius: 6px;
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  background: transparent;
+  color: #888;
+  transition: all 0.2s;
+}
+
+.login-popup-tabs button.tab-active {
+  background: #ffffff;
+  color: #262626;
+  font-weight: 700;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* ── Feedback messages ── */
+.login-popup-error,
+.login-popup-success {
+  padding: 10px 14px;
+  border-radius: 6px;
+  font-size: 13px;
+  font-weight: 500;
+}
+
+.login-popup-error {
+  background: #fff0ee;
+  color: #c0392b;
+  border: 1px solid #f5c6c2;
+}
+
+.login-popup-success {
+  background: #eafaf1;
+  color: #1e8449;
+  border: 1px solid #a9dfbf;
 }
 
 /* ── Inputs ── */
@@ -59,41 +118,44 @@
   gap: 14px;
 }
 
+.input-group {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.input-group label {
+  font-size: 12px;
+  font-weight: 600;
+  color: #555;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
 .login-popup-inputs input {
   width: 100%;
   padding: 12px 14px;
-  border: 1px solid #ddd;
-  border-radius: 6px;
+  border: 1.5px solid #e0e0e0;
+  border-radius: 8px;
   font-size: 14px;
   color: #262626;
+  background: #f7f7f7;
   outline: none;
   box-sizing: border-box;
-  transition: border-color 0.2s;
+  transition: border-color 0.2s, background 0.2s, box-shadow 0.2s;
+}
+
+.login-popup-inputs input::placeholder {
+  color: #aaa;
 }
 
 .login-popup-inputs input:focus {
   border-color: tomato;
+  background: #ffffff;
+  box-shadow: 0 0 0 3px rgba(255, 99, 71, 0.12);
 }
 
-/* ── Submit button ── */
-.login-popup-container button[type='submit'] {
-  width: 100%;
-  padding: 13px;
-  background: tomato;
-  color: #fff;
-  border: none;
-  border-radius: 6px;
-  font-size: 15px;
-  font-weight: 600;
-  cursor: pointer;
-  transition: background 0.3s ease;
-}
-
-.login-popup-container button[type='submit']:hover {
-  background: #e03e1a;
-}
-
-/* ── Checkbox row ── */
+/* ── Terms checkbox ── */
 .login-popup-condition {
   display: flex;
   align-items: flex-start;
@@ -101,7 +163,7 @@
 }
 
 .login-popup-condition input[type='checkbox'] {
-  margin-top: 3px;
+  margin-top: 2px;
   accent-color: tomato;
   flex-shrink: 0;
   width: 15px;
@@ -109,17 +171,72 @@
   cursor: pointer;
 }
 
-.login-popup-condition p {
+.login-popup-condition label {
   font-size: 12px;
   color: #777;
-  margin: 0;
   line-height: 1.5;
+  cursor: pointer;
 }
 
-/* ── Toggle link ── */
+.login-popup-condition label span {
+  color: tomato;
+  text-decoration: underline;
+}
+
+/* ── Submit button ── */
+.login-popup-submit {
+  width: 100%;
+  padding: 13px;
+  background: tomato;
+  color: #ffffff;
+  border: none;
+  border-radius: 8px;
+  font-size: 15px;
+  font-weight: 700;
+  cursor: pointer;
+  letter-spacing: 0.3px;
+  transition: background 0.25s, transform 0.1s, box-shadow 0.25s;
+}
+
+.login-popup-submit:hover:not(:disabled) {
+  background: #e03e1a;
+  box-shadow: 0 4px 14px rgba(255, 99, 71, 0.35);
+}
+
+.login-popup-submit:active:not(:disabled) {
+  transform: scale(0.98);
+}
+
+.login-popup-submit:disabled {
+  opacity: 0.65;
+  cursor: not-allowed;
+}
+
+/* Loading spinner inside button */
+.btn-loading {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.btn-loading::after {
+  content: '';
+  width: 14px;
+  height: 14px;
+  border: 2px solid rgba(255, 255, 255, 0.4);
+  border-top-color: #fff;
+  border-radius: 50%;
+  animation: spin 0.7s linear infinite;
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+/* ── Footer toggle ── */
 .login-popup-toggle {
   font-size: 13px;
-  color: #555;
+  color: #666;
   margin: 0;
   text-align: center;
 }
@@ -134,7 +251,7 @@
 /* ── Mobile ── */
 @media (max-width: 480px) {
   .login-popup-container {
-    max-width: 90vw;
-    padding: 24px 20px;
+    max-width: 92vw;
+    padding: 24px 18px;
   }
 }

@@ -3,28 +3,62 @@ import './FoodDisplay.css'
 import { StoreContext } from '../../context/storeContext'
 import FoodItem from '../Fooditem/Fooditem'
 
-const FoodDisplay = ({ category }) => {
-  const { food_list } = useContext(StoreContext)
+const resolveImage = (image) => {
+  if (!image) return ''
+  if (typeof image !== 'string') return String(image)
+  if (image.startsWith('/') || image.startsWith('http') || image.startsWith('data:')) return image
+  return `/images/${image}`
+}
 
-  const filtered_food_list = category === 'All'
+const SkeletonCard = () => (
+  <div className='skeleton-card'>
+    <div className='skeleton-img' />
+    <div className='skeleton-body'>
+      <div className='skeleton-line wide' />
+      <div className='skeleton-line medium' />
+      <div className='skeleton-line narrow' />
+    </div>
+  </div>
+)
+
+const FoodDisplay = ({ category }) => {
+  const { food_list, foodLoading } = useContext(StoreContext)
+
+  const filtered = category === 'All'
     ? food_list
     : food_list.filter(item => item.category === category)
 
   return (
     <div className='food-display' id='fooddisplay'>
-      <h2>Top dishes near you</h2>
-      <div className="food-display-list">
-        {filtered_food_list.map((item, index) => (
-          <FoodItem
-            key={item._id}
-            id={item._id}
-            name={item.name}
-            description={item.description}
-            price={item.price}
-            image={item.image}
-          />
-        ))}
+
+      <div className='food-display-header'>
+        <h2>{category === 'All' ? 'All Dishes' : category}</h2>
+        {!foodLoading && <span className='food-count'>{filtered.length} items</span>}
       </div>
+
+      {foodLoading ? (
+        <div className='food-display-list'>
+          {Array.from({ length: 8 }).map((_, i) => <SkeletonCard key={i} />)}
+        </div>
+      ) : filtered.length === 0 ? (
+        <div className='food-empty'>
+          <p>No dishes found in this category.</p>
+        </div>
+      ) : (
+        <div className='food-display-list'>
+          {filtered.map((item) => (
+            <FoodItem
+              key={item._id}
+              id={item._id}
+              name={item.name}
+              description={item.description}
+              price={item.price}
+              image={resolveImage(item.image)}
+            />
+          ))}
+        </div>
+      )}
+
     </div>
   )
 }

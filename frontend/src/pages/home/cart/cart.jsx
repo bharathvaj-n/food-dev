@@ -38,7 +38,14 @@ const Cart = () => {
           return (
             <React.Fragment key={item._id}>
               <div className='cart-items-item'>
-                <img src={item.image} alt={item.name} />
+                <img
+                  src={
+                    typeof item.image !== 'string' || item.image.startsWith('/') || item.image.startsWith('http')
+                      ? item.image
+                      : `/images/${item.image}`
+                  }
+                  alt={item.name}
+                />
                 <p>{item.name}</p>
                 <p>${Number(item.price).toFixed(2)}</p>
                 <p>{cartItems[item._id]}</p>

@@ -1,5 +1,12 @@
-import mongoose from 'mongoose';
+import mongoose from "mongoose";
 
-const connectDB = async () =>{
-    await mongoose.connect('mongodb+srv://Spicyfood:12345@cluster0.ng4fsne.mongodb.net/spicyfood').then(()=>console.log("DB Connected"));
-}
+export const connectDB = async () => {
+  try {
+    await mongoose.connect(process.env.MONGODB_URI);
+
+    console.log("MongoDB Connected Successfully");
+  } catch (error) {
+    console.error("MongoDB Connection Error:", error.message);
+    process.exit(1);
+  }
+};
