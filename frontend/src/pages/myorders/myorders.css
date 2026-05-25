@@ -80,9 +80,52 @@
   white-space: nowrap;
   transition: border-color 0.2s, color 0.2s;
 }
-
 .track-btn:hover {
   border-color: #ff6347;
+  color: #ff6347;
+}
+
+.track-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.4);
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.track-modal {
+  background: #fff;
+  border-radius: 12px;
+  padding: 28px 32px;
+  min-width: 260px;
+  text-align: center;
+  position: relative;
+  box-shadow: 0 8px 32px rgba(0,0,0,0.15);
+}
+
+.track-close {
+  position: absolute;
+  top: 10px;
+  right: 12px;
+  background: none;
+  border: none;
+  font-size: 16px;
+  cursor: pointer;
+  color: #9ca3af;
+}
+.track-close:hover { color: #ef4444; }
+
+.track-order-id {
+  font-size: 12px;
+  color: #9ca3af;
+  margin-bottom: 14px;
+}
+
+.track-current-status {
+  font-size: 20px;
+  font-weight: 700;
   color: #ff6347;
 }
 
