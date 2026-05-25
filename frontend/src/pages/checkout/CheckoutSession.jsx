@@ -194,7 +194,7 @@ const CheckoutSession = () => {
     }
   }
 
-  // Step 2b: FAIL clicked -> cancel order in DB -> close modal -> toast only
+  // Step 2b: FAIL clicked -> cancel order in DB -> close modal -> redirect home
   const handle3dsFail = async () => {
     setDsLoading(true)
     try {
@@ -204,7 +204,13 @@ const CheckoutSession = () => {
     } catch {}
     setDsLoading(false)
     setPendingOrderId(null)
-    closeModal(() => showToast('Payment Cancelled — Authentication failed. Please try again.', 'error'))
+    setDsClosing(true)
+    setTimeout(() => {
+      setDsClosing(false)
+      setShow3ds(false)
+      showToast('Payment Cancelled', 'error')
+      setTimeout(() => navigate('/'), 1500)
+    }, 280)
   }
 
   // CANCEL: close modal silently

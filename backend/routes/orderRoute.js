@@ -7,6 +7,7 @@ import {
   allOrders,
   updateStatus,
   cancelOrder,
+  createTestOrder,
 } from "../controllers/orderController.js";
 import authMiddleware from "../middleware/auth.js";
 
@@ -18,6 +19,7 @@ orderRouter.post("/verify",     verifyOrder);
 orderRouter.post("/userorders", authMiddleware, userOrders);
 orderRouter.get("/list",        allOrders);
 orderRouter.post("/status",     updateStatus);
-orderRouter.post("/cancel",     authMiddleware, cancelOrder);
+orderRouter.post("/cancel",       authMiddleware, cancelOrder);
+orderRouter.post("/create-test",  createTestOrder);
 
 export default orderRouter;

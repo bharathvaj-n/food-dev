@@ -92,11 +92,55 @@ const userOrders = async (req, res) => {
 // ── GET /api/order/list (admin) ───────────────────────────────────────────
 const allOrders = async (req, res) => {
   try {
-    const orders = await orderModel.find({}).sort({ createdAt: -1 });
-    res.json({ success: true, data: orders });
+    const orders = await orderModel.find({}).sort({ createdAt: -1 })
+    const data = orders.map(o => ({
+      _id:           o._id,
+      userId:        o.userId,
+      items:         o.items,
+      amount:        o.amount,
+      paymentStatus: o.paymentStatus ?? o.payment,
+      status:        o.status,
+    }))
+    res.json({ success: true, data })
   } catch (error) {
     console.error("allOrders error:", error);
     res.status(500).json({ success: false, message: "Server error" });
+  }
+};
+
+// ── POST /api/order/create-test ───────────────────────────────────────────
+const createTestOrder = async (req, res) => {
+  try {
+    const newOrder = new orderModel({
+      userId: "660b92f93db450033d0b4a1f",
+      items: [
+        {
+          name:        "Greek salad",
+          description: "Food provides essential nutrients for overall health and well-being",
+          price:       12,
+          image:       "1717971563578food_1.png",
+          category:    "Salad",
+          quantity:    2,
+        },
+        {
+          name:        "Veg salad",
+          description: "Food provides essential nutrients for overall health and well-being",
+          price:       10,
+          image:       "1717971563578food_2.png",
+          category:    "Salad",
+          quantity:    1,
+        },
+      ],
+      amount:        65,
+      paymentStatus: true,
+      payment:       true,
+      status:        "paid",
+    })
+    await newOrder.save()
+    res.json({ success: true, message: "Test order inserted successfully" })
+  } catch (error) {
+    console.error("createTestOrder error:", error);
+    res.status(500).json({ success: false, message: error.message })
   }
 };
 
@@ -118,19 +162,15 @@ const cancelOrder = async (req, res) => {
     const { orderId } = req.body;
     if (!orderId) return res.status(400).json({ success: false, message: "orderId is required" });
 
-    const order = await orderModel.findByIdAndUpdate(
-      orderId,
-      { payment: false, status: "cancelled", cancelledAt: new Date() },
-      { new: true }
-    );
+    const order = await orderModel.findByIdAndDelete(orderId);
 
     if (!order) return res.status(404).json({ success: false, message: "Order not found" });
 
-    res.json({ success: true, message: "Payment cancelled successfully" });
+    res.json({ success: true, message: "Order deleted successfully" });
   } catch (error) {
     console.error("cancelOrder error:", error);
     res.status(500).json({ success: false, message: "Server error" });
   }
 };
 
-export { placeOrder, confirmPayment, verifyOrder, userOrders, allOrders, updateStatus, cancelOrder };
+export { placeOrder, confirmPayment, verifyOrder, userOrders, allOrders, updateStatus, cancelOrder, createTestOrder };

@@ -32,8 +32,23 @@ const FoodDisplay = ({ category }) => {
     <div className='food-display' id='fooddisplay'>
 
       <div className='food-display-header'>
-        <h2>{category === 'All' ? 'All Dishes' : category}</h2>
-        {!foodLoading && <span className='food-count'>{filtered.length} items</span>}
+        <div className='food-display-title-block'>
+          <h2>
+            {category === 'All'
+              ? <>
+                  <span className='title-black'>Top dishes&nbsp;</span>
+                  <span className='title-orange'>near you</span>
+                </>
+              : category
+            }
+          </h2>
+          {category === 'All' && (
+            <p className='food-display-subtitle'>Handpicked favourites delivered fresh to your door</p>
+          )}
+        </div>
+        {!foodLoading && (
+          <span className='food-count'>{filtered.length} items</span>
+        )}
       </div>
 
       {foodLoading ? (

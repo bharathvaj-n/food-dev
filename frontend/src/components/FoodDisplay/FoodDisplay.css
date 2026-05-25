@@ -11,27 +11,71 @@
 .food-display-header {
   display: flex;
   align-items: center;
-  gap: 14px;
-  margin-bottom: 30px;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 28px 0;
+  border-top: 1px solid #efefef;
+  border-bottom: 1px solid #efefef;
+  margin-bottom: 36px;
+}
+
+.food-display-title-block {
+  display: flex;
+  flex-direction: column;
+  gap: 7px;
 }
 
 .food-display-header h2 {
-  font-size: 32px;
-  font-weight: 600;
-  color: #262626;
-  letter-spacing: -0.5px;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 0;
   margin: 0;
+  line-height: 1.15;
+  font-family: 'Segoe UI', system-ui, -apple-system, 'Helvetica Neue', sans-serif;
+}
+
+.title-black {
+  font-size: 36px;
+  font-weight: 800;
+  color: #1a1a1a;
+  letter-spacing: -1px;
+}
+
+.title-orange {
+  font-size: 36px;
+  font-weight: 800;
+  color: #ff6b4a;
+  letter-spacing: -1px;
+}
+
+.food-display-subtitle {
+  font-size: 13.5px;
+  color: #aaa;
+  margin: 0;
+  font-weight: 400;
+  letter-spacing: 0.15px;
+  font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
 }
 
 .food-count {
-  background: #fff3f0;
-  color: #ff6347;
-  font-size: 13px;
-  font-weight: 600;
-  padding: 3px 10px;
-  border-radius: 20px;
-  border: 1px solid #ffd5cc;
+  flex-shrink: 0;
+  background: #fff8f6;
+  color: #ff6b4a;
+  font-size: 12.5px;
+  font-weight: 700;
+  padding: 6px 16px;
+  border-radius: 999px;
+  border: 1.5px solid #ffd0c4;
   white-space: nowrap;
+  letter-spacing: 0.2px;
+  font-family: 'Segoe UI', system-ui, sans-serif;
+  transition: background 0.2s;
+}
+
+.food-count:hover {
+  background: #fff0ec;
 }
 
 /* ── Empty state ── */
@@ -56,15 +100,12 @@
     margin-bottom: 35px;
     padding: 0 15px;
   }
-
   .food-display-list {
     grid-template-columns: repeat(2, 1fr);
     gap: 20px;
   }
-  
-  .food-display-header h2 {
-    font-size: 28px;
-  }
+  .title-black,
+  .title-orange { font-size: 30px; letter-spacing: -0.7px; }
 }
 
 /* Mobile */
@@ -75,15 +116,14 @@
     padding: 0 12px;
     max-width: 100%;
   }
-  
   .food-display-list {
-    grid-template-columns: 1fr;
+    grid-template-columns: repeat(2, 1fr);
     gap: 16px;
   }
-  
-  .food-display-header h2 {
-    font-size: 24px;
-  }
+  .title-black,
+  .title-orange { font-size: 26px; letter-spacing: -0.5px; }
+  .food-display-subtitle { font-size: 12px; }
+  .food-display-header { padding: 22px 0; }
 }
 
 @media (max-width: 600px) {
@@ -92,15 +132,13 @@
     margin-bottom: 20px;
     padding: 0;
   }
-
-  .food-display-header h2 {
-    font-size: 22px;
-  }
-
   .food-display-list {
     grid-template-columns: 1fr;
     gap: 14px;
   }
+  .title-black,
+  .title-orange { font-size: 22px; letter-spacing: -0.4px; }
+  .food-display-header { padding: 18px 0; margin-bottom: 24px; }
 }
 
 @media (max-width: 480px) {
@@ -109,14 +147,11 @@
     margin-bottom: 16px;
     padding: 0;
   }
-
-  .food-display-list {
-    gap: 12px;
-  }
-  
-  .food-display-header h2 {
-    font-size: 20px;
-  }
+  .food-display-list { gap: 12px; }
+  .title-black,
+  .title-orange { font-size: 20px; letter-spacing: -0.3px; }
+  .food-display-subtitle { display: none; }
+  .food-count { font-size: 11px; padding: 5px 12px; }
 }
 
 /* ── Skeleton loader ── */
