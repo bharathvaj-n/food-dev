@@ -37,10 +37,18 @@ const PlaceOrder = () => {
   const [form, setForm] = useState(getSavedForm)
   const [errors, setErrors] = useState({})
 
+  // Redirect to home if not logged in
+  useEffect(() => {
+    if (!token) navigate('/', { replace: true })
+  }, [token, navigate])
+
   // Persist form to localStorage on every change
   useEffect(() => {
     localStorage.setItem(STORAGE_KEY, JSON.stringify(form))
   }, [form])
+
+  // Don't render anything while redirecting
+  if (!token) return null
 
   const cartList = food_list.filter(item => cartItems[item._id] > 0)
   const subtotal  = getTotalCartAmount()
@@ -86,7 +94,6 @@ const PlaceOrder = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault()
-    if (!token) { alert('Please sign in to place an order'); return }
     if (cartList.length === 0) { alert('Your cart is empty'); return }
 
     // Clear all previous errors first

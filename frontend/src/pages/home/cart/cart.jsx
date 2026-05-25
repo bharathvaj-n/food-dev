@@ -1,13 +1,20 @@
-import React, { useContext, useState } from 'react'
+import React, { useContext, useState, useEffect } from 'react'
 import './cart.css'
 import { StoreContext } from '../../../context/storeContext'
 import { assets } from '../../../assets/assets'
 import { useNavigate } from 'react-router-dom'
 
 const Cart = () => {
-  const { food_list, cartItems, removeAllFromCart, getTotalCartAmount } = useContext(StoreContext)
+  const { food_list, cartItems, removeAllFromCart, getTotalCartAmount, token } = useContext(StoreContext)
   const [promoCode, setPromoCode] = useState('')
   const navigate = useNavigate()
+
+  // Redirect to home if not logged in
+  useEffect(() => {
+    if (!token) navigate('/', { replace: true })
+  }, [token, navigate])
+
+  if (!token) return null
 
   const subtotal = getTotalCartAmount()
   const deliveryFee = subtotal > 0 ? 2 : 0

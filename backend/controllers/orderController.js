@@ -93,15 +93,7 @@ const userOrders = async (req, res) => {
 const allOrders = async (req, res) => {
   try {
     const orders = await orderModel.find({}).sort({ createdAt: -1 })
-    const data = orders.map(o => ({
-      _id:           o._id,
-      userId:        o.userId,
-      items:         o.items,
-      amount:        o.amount,
-      paymentStatus: o.paymentStatus ?? o.payment,
-      status:        o.status,
-    }))
-    res.json({ success: true, data })
+    res.json({ success: true, data: orders })
   } catch (error) {
     console.error("allOrders error:", error);
     res.status(500).json({ success: false, message: "Server error" });
