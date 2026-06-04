@@ -7,8 +7,12 @@
   "main": "server.js",
   "type": "module",
   "scripts": {
+    "start": "node server.js",
     "server": "nodemon server.js",
     "seed": "node seed.js"
+  },
+  "engines": {
+    "node": "22.x"
   },
   "dependencies": {
     "accepts": "^2.0.0",

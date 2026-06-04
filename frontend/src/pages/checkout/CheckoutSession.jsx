@@ -104,8 +104,9 @@ const CheckoutSession = () => {
 
   const resolveImage = (image) => {
     if (!image || typeof image !== 'string') return ''
-    if (image.startsWith('/') || image.startsWith('http')) return image
-    return `/images/${image}`
+    if (image.startsWith('http')) return image
+    const base = import.meta.env.VITE_API_URL || 'http://localhost:4000'
+    return `${base}/images/${image.replace(/^\/images\//, '')}`
   }
 
   const handleChange = (e) => {
