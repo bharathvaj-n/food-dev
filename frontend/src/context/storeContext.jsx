@@ -26,9 +26,10 @@ function StoreContextProvider({ children }) {
       // Food list — backend first, fall back to local assets
       try {
         const { data } = await axios.get('/api/food/list')
+        console.log('[FoodList] success:', data.success, '| count:', data.data?.length)
         if (data.success && data.data.length > 0) setFoodList(data.data)
-      } catch {
-        // backend offline — localFoodList already set as default
+      } catch (err) {
+        console.error('[FoodList] fetch failed:', err.message)
       } finally {
         setFoodLoading(false)
       }

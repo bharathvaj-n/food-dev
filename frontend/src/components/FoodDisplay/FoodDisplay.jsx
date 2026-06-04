@@ -3,11 +3,13 @@ import './FoodDisplay.css'
 import { StoreContext } from '../../context/storeContext'
 import FoodItem from '../Fooditem/Fooditem'
 
+const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:4000'
+
 const resolveImage = (image) => {
   if (!image) return ''
-  if (typeof image !== 'string') return String(image)
-  if (image.startsWith('/') || image.startsWith('http') || image.startsWith('data:')) return image
-  return `/images/${image}`
+  if (typeof image !== 'string') return ''
+  if (image.startsWith('http') || image.startsWith('data:')) return image
+  return `${API_URL}/images/${image.replace(/^\/images\//, '')}`
 }
 
 const SkeletonCard = () => (
