@@ -1,0 +1,152 @@
+/* ═══════════════════════════════════════
+   Sidebar — desktop fixed, mobile drawer
+═══════════════════════════════════════ */
+
+.sidebar {
+  position: fixed;
+  top: var(--navbar-height);
+  left: 0;
+  width: var(--sidebar-width);
+  height: calc(100vh - var(--navbar-height));
+  background: #ffffff;
+  border-right: 1px solid #e2e2e2;
+  padding: 18px 0 16px;
+  overflow-y: auto;
+  overflow-x: hidden;
+  z-index: 200;
+  display: flex;
+  flex-direction: column;
+  scrollbar-width: none;
+  box-shadow: 2px 0 8px rgba(0,0,0,0.06);
+  transition: transform 0.28s cubic-bezier(0.4,0,0.2,1);
+}
+
+.sidebar::-webkit-scrollbar { display: none; }
+
+/* ── MENU label ── */
+.sidebar-heading {
+  font-size: 10px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+  color: #b0b0b8;
+  padding: 0 14px 10px;
+}
+
+/* ── Nav list ── */
+.sidebar-nav {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  padding: 0 10px;
+}
+
+/* ── Nav item ── */
+.sidebar-item {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  padding: 10px 14px;
+  border: 1.5px solid #e8e9f0;
+  border-radius: 8px;
+  background: #f7f8fc;
+  color: #4b4b63;
+  font-size: 13px;
+  font-weight: 500;
+  text-decoration: none;
+  cursor: pointer;
+  transition: background 0.15s, border-color 0.15s, color 0.15s;
+}
+
+.sidebar-item:hover {
+  background: #f0f1f8;
+  border-color: #c8c9d8;
+  color: #1e1e2d;
+}
+
+.sidebar-item:hover .sidebar-icon { opacity: 0.8; }
+
+/* Active */
+.sidebar-item.active {
+  background: #fff7f5;
+  border-color: #ffb8a8;
+  color: #e04e35;
+  font-weight: 600;
+}
+
+.sidebar-item.active .sidebar-icon {
+  opacity: 1;
+  filter: invert(38%) sepia(80%) saturate(700%) hue-rotate(335deg);
+}
+
+/* Icon */
+.sidebar-icon {
+  width: 17px;
+  height: 17px;
+  object-fit: contain;
+  flex-shrink: 0;
+  opacity: 0.55;
+  transition: opacity 0.15s, filter 0.15s;
+}
+
+/* ── Close button — hidden on desktop ── */
+.sidebar-close {
+  display: none;
+  align-self: flex-end;
+  margin: 0 12px 12px;
+  background: none;
+  border: none;
+  font-size: 18px;
+  color: #9898b3;
+  cursor: pointer;
+  line-height: 1;
+  padding: 4px 6px;
+  border-radius: 6px;
+  transition: color 0.15s, background 0.15s;
+}
+.sidebar-close:hover { color: #e04e35; background: #fff0ee; }
+
+/* ── Overlay — mobile only ── */
+.sidebar-overlay {
+  display: none;
+}
+
+/* ═══════════════════════════════════════
+   Mobile — slide-in drawer
+═══════════════════════════════════════ */
+@media (max-width: 768px) {
+
+  /* Sidebar hidden off-screen by default */
+  .sidebar {
+    top: 0;
+    height: 100vh;
+    transform: translateX(-100%);
+    box-shadow: none;
+    z-index: 400;
+    padding-top: 14px;
+  }
+
+  /* Slide in when open */
+  .sidebar.sidebar-open {
+    transform: translateX(0);
+    box-shadow: 4px 0 24px rgba(0,0,0,0.15);
+  }
+
+  /* Show close button on mobile */
+  .sidebar-close { display: block; }
+
+  /* Dark overlay */
+  .sidebar-overlay {
+    display: block;
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.45);
+    z-index: 399;
+    animation: fadeIn 0.2s ease;
+  }
+
+  @keyframes fadeIn {
+    from { opacity: 0; }
+    to   { opacity: 1; }
+  }
+}

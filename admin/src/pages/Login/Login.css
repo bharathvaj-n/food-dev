@@ -1,0 +1,326 @@
+/* ═══════════════════════════════════════
+   Page shell
+═══════════════════════════════════════ */
+.login-page {
+  display: flex;
+  min-height: 100vh;
+  background: var(--bg);
+}
+
+/* ═══════════════════════════════════════
+   Left — Branding panel
+═══════════════════════════════════════ */
+.login-brand {
+  position: relative;
+  width: 42%;
+  background: linear-gradient(145deg, #ff6347 0%, #e04e35 60%, #c73d26 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  padding: 48px 40px;
+}
+
+.login-brand-inner {
+  position: relative;
+  z-index: 2;
+  color: #fff;
+}
+
+.login-brand-logo {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 40px;
+}
+
+.login-brand-logo img {
+  width: 44px;
+  height: 44px;
+  border-radius: 10px;
+  object-fit: contain;
+  background: rgba(255,255,255,0.2);
+  padding: 4px;
+}
+
+.login-brand-logo span {
+  font-size: 26px;
+  font-weight: 800;
+  color: #fff;
+  letter-spacing: -0.5px;
+}
+
+.login-brand-inner h1 {
+  font-size: 40px;
+  font-weight: 800;
+  line-height: 1.2;
+  color: #fff;
+  margin-bottom: 16px;
+  letter-spacing: -0.6px;
+}
+
+.login-brand-inner p {
+  font-size: 15px;
+  color: rgba(255,255,255,0.82);
+  line-height: 1.65;
+  max-width: 300px;
+  margin-bottom: 36px;
+}
+
+.login-features {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.login-features li {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 14px;
+  font-weight: 500;
+  color: rgba(255,255,255,0.9);
+}
+
+/* Decorative circles */
+.login-brand-circles { position: absolute; inset: 0; z-index: 1; pointer-events: none; }
+
+.login-brand .circle {
+  position: absolute;
+  border-radius: 50%;
+  background: rgba(255,255,255,0.07);
+}
+
+.login-brand .c1 { width: 360px; height: 360px; bottom: -100px; right: -90px; }
+.login-brand .c2 { width: 200px; height: 200px; top:    -50px;  right:  50px; }
+.login-brand .c3 { width: 130px; height: 130px; bottom:  60px;  left:  -40px; }
+
+/* ═══════════════════════════════════════
+   Right — Form panel
+═══════════════════════════════════════ */
+.login-form-panel {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 40px 24px;
+}
+
+/* Card */
+.login-card {
+  width: 100%;
+  max-width: 420px;
+  background: var(--white);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-lg);
+  padding: 40px 36px;
+}
+
+.login-card-header { margin-bottom: 28px; }
+
+.login-card-header h2 {
+  font-size: 26px;
+  font-weight: 800;
+  color: var(--text);
+  letter-spacing: -0.4px;
+}
+
+.login-card-header p {
+  font-size: 13px;
+  color: var(--text-muted);
+  margin-top: 4px;
+}
+
+/* ═══════════════════════════════════════
+   Form — reuses sf-* from Signup
+═══════════════════════════════════════ */
+.login-form {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+
+/* Shared field group */
+.sf-group {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.sf-group label {
+  font-size: 12px;
+  font-weight: 700;
+  color: var(--text-secondary);
+  text-transform: uppercase;
+  letter-spacing: 0.6px;
+}
+
+/* Label row with forgot link */
+.sf-label-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.forgot-link {
+  background: none;
+  border: none;
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--tomato);
+  cursor: pointer;
+  padding: 0;
+  font-family: inherit;
+  transition: opacity var(--transition);
+}
+
+.forgot-link:hover { opacity: 0.7; }
+
+/* Input wrapper */
+.sf-input-wrap {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.sf-group input,
+.sf-input-wrap input {
+  width: 100%;
+  padding: 11px 14px;
+  border: 1.5px solid var(--border);
+  border-radius: var(--radius-sm);
+  font-size: 14px;
+  font-family: inherit;
+  color: var(--text);
+  background: var(--surface);
+  outline: none;
+  transition: border-color var(--transition), box-shadow var(--transition), background var(--transition);
+}
+
+.sf-input-wrap input { padding-right: 44px; }
+
+.sf-group input:focus,
+.sf-input-wrap input:focus {
+  border-color: var(--tomato);
+  box-shadow: 0 0 0 4px var(--tomato-glow);
+  background: var(--white);
+}
+
+.sf-group input::placeholder,
+.sf-input-wrap input::placeholder { color: #c4c4d4; }
+
+/* Eye toggle */
+.sf-eye {
+  position: absolute;
+  right: 12px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-size: 16px;
+  line-height: 1;
+  padding: 2px;
+  color: var(--text-muted);
+  transition: opacity var(--transition);
+  display: flex;
+  align-items: center;
+}
+
+.sf-eye:hover { opacity: 0.7; }
+
+/* ── Remember me ── */
+.remember-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  cursor: pointer;
+  font-size: 13px;
+  color: var(--text-secondary);
+  font-weight: 500;
+  user-select: none;
+}
+
+.remember-row input[type="checkbox"] {
+  width: 15px;
+  height: 15px;
+  accent-color: var(--tomato);
+  cursor: pointer;
+  flex-shrink: 0;
+}
+
+/* ── Submit button ── */
+.sf-submit {
+  width: 100%;
+  padding: 13px;
+  margin-top: 4px;
+  background: #16162a;
+  color: #fff;
+  border: none;
+  border-radius: var(--radius-sm);
+  font-size: 14px;
+  font-family: inherit;
+  font-weight: 800;
+  letter-spacing: 0.8px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  transition: background var(--transition), transform var(--transition), box-shadow var(--transition);
+}
+
+.sf-submit:hover:not(:disabled) {
+  background: var(--tomato);
+  transform: translateY(-1px);
+  box-shadow: 0 6px 20px rgba(255,99,71,0.35);
+}
+
+.sf-submit:active:not(:disabled) {
+  transform: translateY(0);
+  box-shadow: none;
+}
+
+.sf-submit:disabled { opacity: 0.6; cursor: not-allowed; }
+
+/* Spinner */
+.sf-spinner {
+  width: 18px;
+  height: 18px;
+  border: 2.5px solid rgba(255,255,255,0.35);
+  border-top-color: #fff;
+  border-radius: 50%;
+  animation: spin 0.7s linear infinite;
+}
+
+@keyframes spin { to { transform: rotate(360deg); } }
+
+/* ── Signup link ── */
+.login-signup-link {
+  text-align: center;
+  font-size: 13px;
+  color: var(--text-muted);
+  margin-top: 22px;
+}
+
+.login-signup-link a {
+  color: var(--tomato);
+  font-weight: 700;
+  transition: opacity var(--transition);
+}
+
+.login-signup-link a:hover { opacity: 0.75; }
+
+/* ═══════════════════════════════════════
+   Responsive
+═══════════════════════════════════════ */
+@media (max-width: 860px) {
+  .login-brand       { display: none; }
+  .login-form-panel  { padding: 32px 16px; }
+  .login-card        { padding: 32px 24px; }
+}
+
+@media (max-width: 420px) {
+  .login-card            { padding: 28px 18px; border-radius: var(--radius); }
+  .login-card-header h2  { font-size: 22px; }
+}

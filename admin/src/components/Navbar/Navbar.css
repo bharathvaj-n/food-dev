@@ -1,0 +1,94 @@
+/* ═══════════════════════════════════════
+   Navbar
+═══════════════════════════════════════ */
+.navbar {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  height: var(--navbar-height);
+  background: var(--white);
+  border-bottom: 1px solid var(--border);
+  box-shadow: var(--shadow-xs);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 24px;
+  z-index: 300;
+}
+
+.navbar-brand {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.navbar-logo {
+  height: 36px;
+  width: 36px;
+  object-fit: contain;
+  border-radius: 10px;
+}
+
+.navbar-titles {
+  display: flex;
+  flex-direction: column;
+  line-height: 1.2;
+}
+
+.navbar-name {
+  font-size: 19px;
+  font-weight: 800;
+  color: var(--tomato);
+  letter-spacing: -0.4px;
+}
+
+.navbar-sub {
+  font-size: 9px;
+  font-weight: 700;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 1.4px;
+}
+
+/* Avatar */
+.navbar-avatar {
+  height: 36px;
+  width: 36px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 2px solid var(--border);
+  cursor: pointer;
+  transition: border-color 0.15s, transform 0.15s, box-shadow 0.15s;
+}
+.navbar-avatar:hover {
+  border-color: var(--tomato);
+  transform: scale(1.06);
+  box-shadow: 0 0 0 4px var(--tomato-glow);
+}
+
+/* ── Hamburger — hidden on desktop ── */
+.navbar-hamburger {
+  display: none;
+  flex-direction: column;
+  justify-content: center;
+  gap: 5px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 4px;
+  margin-right: 2px;
+}
+
+.navbar-hamburger span {
+  display: block;
+  width: 22px;
+  height: 2px;
+  background: #4b4b63;
+  border-radius: 2px;
+  transition: background 0.15s;
+}
+
+.navbar-hamburger:hover span { background: var(--tomato); }
+
+@media (max-width: 768px) {
+  .navbar-hamburger { display: flex; }
+}

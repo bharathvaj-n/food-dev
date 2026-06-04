@@ -1,0 +1,116 @@
+.list-page { max-width: 860px; }
+
+.list-header { margin-bottom: 22px; }
+
+.list-header h2 {
+  font-size: 21px;
+  font-weight: 700;
+  color: var(--text);
+}
+
+.list-header p {
+  font-size: 13px;
+  color: var(--text-muted);
+  margin-top: 3px;
+}
+
+.list-empty {
+  background: var(--white);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 48px;
+  text-align: center;
+  color: var(--text-muted);
+  font-size: 14px;
+}
+
+/* ── Table ── */
+.list-table-wrap {
+  background: var(--white);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  overflow: hidden;
+}
+
+.list-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.list-table thead tr {
+  background: #fafafa;
+  border-bottom: 1px solid var(--border);
+}
+
+.list-table th {
+  padding: 13px 16px;
+  text-align: left;
+  font-size: 11.5px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.8px;
+  color: var(--text-muted);
+}
+
+.list-table tbody tr {
+  border-bottom: 1px solid var(--border);
+  transition: background var(--transition);
+}
+
+.list-table tbody tr:last-child { border-bottom: none; }
+
+.list-table tbody tr:hover { background: #fafbff; }
+
+.list-table td {
+  padding: 12px 16px;
+  vertical-align: middle;
+  font-size: 14px;
+  color: var(--text);
+}
+
+.list-img {
+  width: 48px;
+  height: 48px;
+  border-radius: 8px;
+  object-fit: cover;
+  border: 1px solid var(--border);
+}
+
+.list-name { font-weight: 600; }
+
+.list-badge {
+  display: inline-block;
+  padding: 3px 10px;
+  background: var(--tomato-light);
+  color: var(--tomato);
+  border-radius: 20px;
+  font-size: 12px;
+  font-weight: 600;
+}
+
+.list-price { font-weight: 700; color: var(--text); }
+
+.list-remove {
+  width: 30px;
+  height: 30px;
+  border: none;
+  border-radius: 6px;
+  background: #fff0ee;
+  color: var(--tomato);
+  font-size: 13px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: background var(--transition), transform var(--transition);
+}
+
+.list-remove:hover {
+  background: var(--tomato);
+  color: #fff;
+  transform: scale(1.1);
+}
+
+@media (max-width: 600px) {
+  .list-table th:nth-child(3),
+  .list-table td:nth-child(3) { display: none; }
+}

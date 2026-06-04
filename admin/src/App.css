@@ -1,0 +1,97 @@
+/* ═══════════════════════════════════════
+   Design Tokens
+═══════════════════════════════════════ */
+:root {
+  /* Brand */
+  --tomato:          #ff6347;
+  --tomato-dark:     #e04e35;
+  --tomato-light:    #fff5f3;
+  --tomato-glow:     rgba(255, 99, 71, 0.15);
+
+  /* Layout */
+  --sidebar-width:   200px;
+  --navbar-height:   60px;
+
+  /* Surface */
+  --bg:              #f4f5f9;
+  --white:           #ffffff;
+  --surface:         #fafbff;
+
+  /* Text */
+  --text:            #16162a;
+  --text-secondary:  #4a4a68;
+  --text-muted:      #9898b3;
+
+  /* Border */
+  --border:          #e8e9f0;
+  --border-focus:    #ff6347;
+
+  /* Shadows */
+  --shadow-xs:       0 1px 3px rgba(0,0,0,0.05);
+  --shadow-sm:       0 2px 8px rgba(0,0,0,0.06);
+  --shadow:          0 4px 20px rgba(0,0,0,0.08);
+  --shadow-lg:       0 8px 32px rgba(0,0,0,0.10);
+
+  /* Radius */
+  --radius-xs:       6px;
+  --radius-sm:       10px;
+  --radius:          14px;
+  --radius-lg:       20px;
+
+  /* Motion */
+  --ease:            cubic-bezier(0.4, 0, 0.2, 1);
+  --transition:      0.2s var(--ease);
+  --transition-slow: 0.35s var(--ease);
+}
+
+/* ═══════════════════════════════════════
+   Reset
+═══════════════════════════════════════ */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: 'Outfit', 'Inter', 'Segoe UI', sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  font-size: 14px;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+a { text-decoration: none; color: inherit; }
+
+/* ═══════════════════════════════════════
+   Shell Layout
+═══════════════════════════════════════ */
+.admin-layout {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+.admin-content {
+  margin-left: var(--sidebar-width);
+  margin-top: var(--navbar-height);
+  padding: 24px 28px;
+  min-height: calc(100vh - var(--navbar-height));
+  width: calc(100% - var(--sidebar-width));
+  overflow-x: hidden;
+  background: #f5f5f5;
+}
+
+/* ═══════════════════════════════════════
+   Responsive
+═══════════════════════════════════════ */
+@media (max-width: 768px) {
+  .admin-content {
+    margin-left: 0;
+    margin-top: var(--navbar-height);
+    width: 100%;
+    padding: 20px 16px;
+  }
+}
