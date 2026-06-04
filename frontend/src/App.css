@@ -22,9 +22,9 @@
 
 @media (max-width: 600px) {
   .app {
-    max-width: 85%;
-    padding: 0;
+    max-width: 100%;
+    padding: 0 12px;
     overflow-x: hidden;
   }
-  .app:has(.stripe-page) { max-width: 100%; }
+  .app:has(.stripe-page) { max-width: 100%; padding: 0; }
 }
