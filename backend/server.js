@@ -12,11 +12,16 @@ import orderRouter from "./routes/orderRoute.js";
 const app = express();
 
 app.use(express.json());
+const allowedOrigins = [
+  'http://localhost:5173',
+  'https://food-dev-vs43.vercel.app',
+  ...(process.env.FRONTEND_URL ? process.env.FRONTEND_URL.split(',').map(s => s.trim()) : []),
+]
+
 app.use(cors({
   origin: (origin, cb) => {
-    const allowed = (process.env.FRONTEND_URL || '').split(',').map(s => s.trim())
-    if (!origin || allowed.includes(origin)) cb(null, true)
-    else cb(new Error('Not allowed by CORS'))
+    if (!origin || allowedOrigins.includes(origin)) cb(null, true)
+    else cb(new Error(`CORS blocked: ${origin}`))
   },
   credentials: true,
 }));
