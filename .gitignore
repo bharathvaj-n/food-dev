@@ -32,6 +32,7 @@ Thumbs.db
 backend/uploads/*
 !backend/uploads/.gitkeep
 !backend/uploads/food_*.png
+!backend/uploads/1779*.png
 
 # ── Vite ──
 *.local
