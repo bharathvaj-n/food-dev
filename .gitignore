@@ -23,12 +23,10 @@ yarn-error.log*
 Thumbs.db
 
 # ── Editor ──
-.vscode/*
-!.vscode/extensions.json
+.vscode/
 .idea/
 
 # ── Uploads (runtime generated) ──
-# Keep static seed images, ignore only user-uploaded files
 backend/uploads/*
 !backend/uploads/.gitkeep
 !backend/uploads/food_*.png
@@ -36,3 +34,8 @@ backend/uploads/*
 
 # ── Vite ──
 *.local
+
+# ── Root level dev-only files ──
+launch.json
+start.bat
+vercel.json
