@@ -1,7 +1,11 @@
 .my-orders {
-  max-width: 800px;
-  margin: 40px auto;
-  padding: 0 20px;
+  width: 100%;
+  padding: 40px 0 80px;
+}
+
+.my-orders .app-inner {
+  display: flex;
+  flex-direction: column;
 }
 
 .my-orders h2 {

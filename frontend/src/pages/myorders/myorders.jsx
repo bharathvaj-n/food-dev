@@ -76,6 +76,7 @@ const MyOrders = () => {
 
   return (
     <div className='my-orders'>
+      <div className='app-inner'>
       <h2>My Orders</h2>
 
       {loading ? (
@@ -116,6 +117,8 @@ const MyOrders = () => {
           ))}
         </div>
       )}
+
+      </div>
 
       {/* Track modal */}
       {trackedOrder && (

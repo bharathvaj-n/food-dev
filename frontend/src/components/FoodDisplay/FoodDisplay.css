@@ -91,15 +91,14 @@
   width: 100%;
 }
 
-/* Tablet - 2 columns */
+/* Tablet - 3 columns */
 @media (max-width: 1024px) {
   .food-display {
     margin-top: 35px;
     margin-bottom: 35px;
-    padding: 0 15px;
   }
   .food-display-list {
-    grid-template-columns: repeat(2, 1fr);
+    grid-template-columns: repeat(3, 1fr);
     gap: 20px;
   }
   .title-black,
@@ -111,7 +110,6 @@
   .food-display {
     margin-top: 30px;
     margin-bottom: 30px;
-    padding: 0 12px;
     max-width: 100%;
   }
   .food-display-list {
@@ -128,7 +126,6 @@
   .food-display {
     margin-top: 20px;
     margin-bottom: 20px;
-    padding: 0;
   }
   .food-display-list {
     grid-template-columns: repeat(2, 1fr);
@@ -143,7 +140,6 @@
   .food-display {
     margin-top: 16px;
     margin-bottom: 16px;
-    padding: 0;
   }
   .food-display-list { gap: 12px; }
   .title-black,
