@@ -5,6 +5,7 @@ import { assets } from '../../assets/assets'
 const Footer = () => {
     return (
         <div className='footer' id='footer'>
+            <div className='footer-inner'>
             <div className="footer-content">
 
                 <div className="footer-content-left">
@@ -35,6 +36,7 @@ const Footer = () => {
                     </ul>
                 </div>
 
+            </div>
             </div>
             <hr className="footer-hr" />
             <p className="footer-copyright">Copyright 2024 &copy; Tomato.com - All Right Reserved.</p>

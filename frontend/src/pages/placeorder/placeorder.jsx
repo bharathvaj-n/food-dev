@@ -132,6 +132,7 @@ const PlaceOrder = () => {
 
 return (
     <div className='order'>
+      <div className='app-inner'>
       <form className='order-form' onSubmit={handleSubmit} noValidate>
 
         {/* ── LEFT: Delivery Info ── */}
@@ -216,6 +217,7 @@ return (
         </div>
 
       </form>
+      </div>
     </div>
   )
 }

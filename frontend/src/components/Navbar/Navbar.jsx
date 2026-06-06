@@ -42,6 +42,7 @@ const Navbar = ({ setShowLogin }) => {
   }
 
   return (
+    <div className="app-inner">
     <div className="navbar">
       {/* Logo */}
       <img
@@ -106,6 +107,7 @@ const Navbar = ({ setShowLogin }) => {
           </div>
         )}
       </div>
+    </div>
     </div>
   )
 }
