@@ -3,13 +3,15 @@ import './fooditem.css'
 import { assets } from '../../assets/assets'
 import { StoreContext } from '../../context/storeContext'
 
+const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:4000'
+
 const Fooditem = ({ id, name, price, description, image }) => {
   const { cartItems, addToCart, removeFromCart } = useContext(StoreContext)
 
   return (
     <div className='food-item'>
         <div className="food-item-img-container">
-            <img className='food-item-image' src={image} alt={name} />
+            <img className='food-item-image' src={`${API_URL}/images/${image}`} alt={name} />
 
             {!cartItems[id] ? (
               <button className='add-btn' onClick={() => addToCart(id)} aria-label="Add item">

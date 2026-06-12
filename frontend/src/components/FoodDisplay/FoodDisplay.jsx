@@ -5,13 +5,6 @@ import FoodItem from '../Fooditem/Fooditem'
 
 const API_URL = import.meta.env.VITE_API_URL || ''
 
-const resolveImage = (image) => {
-  if (!image) return ''
-  if (typeof image !== 'string') return '' // Vite module object from local assets fallback
-  if (image.startsWith('http') || image.startsWith('data:')) return image
-  const clean = image.replace(/^\/images\//, '')
-  return API_URL ? `${API_URL}/images/${clean}` : `/images/${clean}`
-}
 
 const SkeletonCard = () => (
   <div className='skeleton-card'>
@@ -71,7 +64,7 @@ const FoodDisplay = ({ category }) => {
               name={item.name}
               description={item.description}
               price={item.price}
-              image={resolveImage(item.image)}
+              image={item.image}
             />
           ))}
         </div>
